@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './App.css';
 import Root from './components/Root';
 import AuthProvider from './provider/AuthProvider';
+import HttpClientProvider from './provider/HttpClientProvider';
 
 const router = createBrowserRouter([
   {
@@ -23,9 +24,11 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <AuthProvider>
-      <RouterProvider router={router} fallbackElement={<>Loading</>} />
-    </AuthProvider>
+    <HttpClientProvider>
+      <AuthProvider>
+        <RouterProvider router={router} fallbackElement={<>Loading</>} />
+      </AuthProvider>
+    </HttpClientProvider>
   );
 }
 
