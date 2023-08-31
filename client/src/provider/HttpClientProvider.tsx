@@ -31,7 +31,7 @@ const initialHttpClient: iHttpClient = {
   },
 };
 
-const HttpClientContext = createContext<iHttpClient>(initialHttpClient);
+export const HttpClientContext = createContext<iHttpClient>(initialHttpClient);
 
 const { Provider } = HttpClientContext;
 

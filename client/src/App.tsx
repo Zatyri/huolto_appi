@@ -7,6 +7,7 @@ import {
 import './App.css';
 import Root from './components/Root';
 import { AuthContext, iAuthContext } from './provider/AuthProvider';
+import Login from './components/Login';
 
 function App() {
   const auth = useContext<iAuthContext>(AuthContext);
@@ -32,7 +33,7 @@ function App() {
     },
     {
       path: '/login',
-      element: <>login</>
+      element: <Login />
     },
     {
       path: '/logout',
