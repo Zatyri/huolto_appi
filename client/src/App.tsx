@@ -6,20 +6,27 @@ import {
 } from 'react-router-dom';
 import './App.css';
 import Root from './components/Root';
-import { AuthContext, iAuthContext } from './provider/AuthProvider';
+import { AuthContext, AuthState, iAuthContext } from './provider/AuthProvider';
 import Login from './components/Login';
+import Register from './components/Register';
 
 function App() {
   const auth = useContext<iAuthContext>(AuthContext);
+  
+  function protectedRoutes(authState: AuthState):JSX.Element{
+    if(authState === AuthState.loading){
+      return <>Loading</>
+    } else if(authState === AuthState.isAuthenticated){
+      return <Root />
+    }else {
+      return <Navigate to="/login" replace />
+    }
+  }
 
   const router = createBrowserRouter([
     {
       path: '/',
-      element: auth.isAuthenticated() ? (
-        <Root />
-      ) : (
-        <Navigate to="/login" replace />
-      ),
+      element: protectedRoutes(auth.authState),
       children: [
         {
           path: 'dashboard',
@@ -41,7 +48,7 @@ function App() {
     },
     {
       path: '/register',
-      element: <>logout</>
+      element: <Register />
     }
   ]);
 
